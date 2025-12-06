@@ -5,8 +5,13 @@ package com.vanshika.adventofcode
 fun main() {
     val result = object {}.javaClass
         .getResource("/InputPuzzle1.txt")!!
-        .readText().convertToKv().findPassword()
-    print(result)
+        .readText().convertToKv().findPassword1()
+    println(result)
+
+    val result2 = object {}.javaClass
+        .getResource("/InputPuzzle1.txt")!!
+        .readText().convertToKv().findPassword2()
+    println(result2)
 }
 
 fun String.convertToKv(): List<Pair<Char, Int>> =
@@ -16,21 +21,38 @@ fun String.convertToKv(): List<Pair<Char, Int>> =
             it.first() to it.drop(1).toInt()
         }
 
-fun List<Pair<Char, Int>>.findPassword(): Int {
+fun List<Pair<Char, Int>>.findPassword1(): Int {
     var currentPosition = 50
     var counter = 0
-    this.map { pair ->
-        when (pair.first) {
-            'L' -> {  //anti-clock
-                currentPosition = (currentPosition - pair.second + 100) % 100
-                if (currentPosition == 0) counter++
-            }
+    this.forEach { (direction, rotateBy) ->
 
-            else -> {   //clock
-                currentPosition = (currentPosition + pair.second + 100) % 100
-                if (currentPosition == 0) counter++
-            }
+        if (direction == 'L') {
+            currentPosition = (currentPosition - rotateBy + 100) % 100
+        } else {   //clock
+            currentPosition = (currentPosition + rotateBy + 100) % 100
+
         }
+        if (currentPosition == 0) counter++
     }
     return counter
 }
+
+fun List<Pair<Char, Int>>.findPassword2(): Int {
+    var currentPosition = 50
+    var counter = 0
+
+    this.forEach { (direction,rotateBy)->
+        repeat(rotateBy){
+            currentPosition = if(direction=='L'){
+                (currentPosition -1) % 100
+            } else{
+                (currentPosition +1) % 100
+            }
+            if(currentPosition==0)counter++
+        }
+
+    }
+    return counter
+}
+
+
