@@ -1,15 +1,15 @@
-package com.vanshika.adventofcode
+package com.vanshika.adventofcode.advent2025
 
 // when L -> -
 // when R -> +
 fun main() {
     val result = object {}.javaClass
-        .getResource("/InputPuzzle1.txt")!!
+        .getResource("/InputDay1.txt")!!
         .readText().convertToKv().findPassword1()
     println(result)
 
     val result2 = object {}.javaClass
-        .getResource("/InputPuzzle1.txt")!!
+        .getResource("/InputDay1.txt")!!
         .readText().convertToKv().findPassword2()
     println(result2)
 }
