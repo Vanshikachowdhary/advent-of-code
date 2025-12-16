@@ -29,7 +29,7 @@ fun List<Pair<Char, Int>>.findPassword1(): Int {
         if (direction == 'L') {
             currentPosition = (currentPosition - rotateBy + 100) % 100
         } else {   //clock
-            currentPosition = (currentPosition + rotateBy + 100) % 100
+            currentPosition = (currentPosition + rotateBy + 100) % 100  // can remove +100 since the current position will be positive and we're adding the rotate by
 
         }
         if (currentPosition == 0) counter++
